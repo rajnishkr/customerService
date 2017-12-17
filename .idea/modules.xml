@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/contactService/contactService.iml" filepath="$PROJECT_DIR$/contactService/contactService.iml" group="contactService" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/contactService/contactService_main.iml" filepath="$PROJECT_DIR$/.idea/modules/contactService/contactService_main.iml" group="contactService" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/contactService/contactService_test.iml" filepath="$PROJECT_DIR$/.idea/modules/contactService/contactService_test.iml" group="contactService" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customerService.iml" filepath="$PROJECT_DIR$/.idea/modules/customerService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customerService_main.iml" filepath="$PROJECT_DIR$/.idea/modules/customerService_main.iml" group="customerService" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customerService_test.iml" filepath="$PROJECT_DIR$/.idea/modules/customerService_test.iml" group="customerService" />
+      <module fileurl="file://$PROJECT_DIR$/manager/manager.iml" filepath="$PROJECT_DIR$/manager/manager.iml" group="manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager_main.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager_main.iml" group="manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager_test.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager_test.iml" group="manager" />
+    </modules>
+  </component>
+</project>

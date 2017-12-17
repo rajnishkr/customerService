@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.smoketurner:dropwizard-swagger:1.0.0-1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.smoketurner/dropwizard-swagger/1.0.0-1/881d15d8bba4fecf62448ba846b2fbf192a5fe99/dropwizard-swagger-1.0.0-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.smoketurner/dropwizard-swagger/1.0.0-1/f1330c663770a56f5634a0021af6d177308ccf61/dropwizard-swagger-1.0.0-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
