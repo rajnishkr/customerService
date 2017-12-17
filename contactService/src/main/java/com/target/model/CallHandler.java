@@ -73,7 +73,7 @@ public class CallHandler {
             emp.receiveCall(call);
             call.setHandler(emp);
         } else {
-            call.reply("Please wait for free employee to reply");
+            call.reply("Please wait for free JE employee to reply");
             callQueues.get(call.getRank().getValue()).add(call);
         }
     }
