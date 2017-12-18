@@ -1,16 +1,12 @@
 package com.target.model;
 
+import com.target.handler.CallHandler;
+import com.target.model.entity.EmployeeRank;
+
 public class JE extends Employee {
-    private int numberOfcallRecieved;
-    private int totalTimeSpent;
-    private int callEscalated;
+    public JE(CallHandler callHandler, int escalationThreshold) {
 
-    public JE(CallHandler callHandler) {
-
-        super(callHandler);
-        this.numberOfcallRecieved = 0;
-        this.totalTimeSpent = 0;
-        this.callEscalated = 0;
+        super(callHandler, escalationThreshold);
         rank = EmployeeRank.JE;
     }
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class CallHandler {
 
+    private static CallHandler callHandler = null;
     private int numberOfJE;
     private int numberOfSE;
     private int numberOfManager;
@@ -13,7 +14,6 @@ public class CallHandler {
     private int MAX_CALL_PER_EMPLOYEE;
     private List<List<Employee>> employeeLevels;
     private List<List<Call>> callQueues;
-    private static CallHandler callHandler = null;
 
     private CallHandler() {
 

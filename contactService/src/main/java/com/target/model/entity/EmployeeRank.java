@@ -1,4 +1,4 @@
-package com.target.model;
+package com.target.model.entity;
 
 public enum EmployeeRank {
     JE(0), SE(1), MANAGER(2);

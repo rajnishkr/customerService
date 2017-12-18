@@ -1,5 +1,6 @@
 package com.target.model;
 
+import com.target.model.entity.EmployeeRank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,12 +8,13 @@ import lombok.Setter;
 @Getter
 public class Call {
     private Customer caller;
-
+    private int callDuration;
     private EmployeeRank rank;
     private Employee handler;
 
-    public Call(Customer c) {
+    public Call(Customer c, int callDuration) {
         rank = EmployeeRank.JE;
+        this.callDuration = callDuration;
         caller = c;
     }
 
@@ -29,8 +31,12 @@ public class Call {
         return rank;
     }
 
+    public void startCall() {
+        reply("Thank you for calling. My name is " + handler.getId() + " " + handler.getRank() + " How may i assist you?");
+    }
+
     public void endCall() {
         reply("Thank you for calling. " +
-                "Please provide us feedback for improvement");
+                "Please provide us feedback for improvement. Summary callDuration: " + callDuration);
     }
 }

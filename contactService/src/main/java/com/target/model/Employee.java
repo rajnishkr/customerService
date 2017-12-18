@@ -1,5 +1,8 @@
 package com.target.model;
 
+import com.target.handler.CallHandler;
+import com.target.model.entity.EmployeeRank;
+import com.target.model.entity.EmployeeStatus;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,25 +13,44 @@ import java.util.Random;
 @Setter
 @Getter
 @Data
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
+
+    private final int escalationThreshold;
+    EmployeeRank rank;
     private int id;
     private String name;
-    EmployeeRank rank;
     private Employee boss;
     private CallHandler callHandler;
     private Call currentCall;
     private EmployeeStatus employeeStatus;
+    private int numberOfCallReceived;
+    private int totalTimeSpent;
+    private int callEscalated;
 
-    public Employee(CallHandler handler) {
+    public Employee(CallHandler handler, int escalationThreshold) {
+        this.numberOfCallReceived = 0;
+        this.totalTimeSpent = 0;
+        this.callEscalated = 0;
+        this.escalationThreshold = escalationThreshold;
         Random random = new Random();
-        id = random.nextInt();
+        id = random.nextInt(100);
         callHandler = handler;
+        this.currentCall = null;
+        this.employeeStatus = EmployeeStatus.Available;
     }
 
     public void receiveCall(Call call) {
         this.employeeStatus = EmployeeStatus.OnCall;
         currentCall = call;
+        call.setHandler(this);
+        currentCall.startCall();
+        this.numberOfCallReceived++;
+        this.totalTimeSpent += call.getCallDuration();
+        if (call.getCallDuration() >= this.escalationThreshold) {
+            this.callEscalated++;
+            escalateAndReassign();
+        }
     }
 
 
@@ -39,25 +61,17 @@ public class Employee {
             employeeStatus = EmployeeStatus.Available;
         }
 
-        assignNewCall();
     }
 
     public void escalateAndReassign() {
-        if (currentCall != null) {
-            currentCall.incrementRank();
+        if (currentCall != null && currentCall.getRank() != EmployeeRank.MANAGER) {
+            currentCall.setRank(currentCall.incrementRank());
+            System.out.println("\n\n call being escalated to  " + currentCall.getRank());
             callHandler.dispatchCall(currentCall);
             currentCall = null;
             employeeStatus = EmployeeStatus.Available;
         }
 
-        assignNewCall();
-    }
-
-    public boolean assignNewCall() {
-        if (!isFree()) {
-            return false;
-        }
-        return callHandler.assignCall(this);
     }
 
 
@@ -84,5 +98,15 @@ public class Employee {
     public int hashCode() {
 
         return Objects.hash(super.hashCode(), getId(), getName(), getRank());
+    }
+
+    public int compareTo(Employee e) {
+        if (this.numberOfCallReceived == callHandler.getMAX_CALL_PER_EMPLOYEE()) {
+            return -1;
+        }
+        if (this.employeeStatus != EmployeeStatus.Available)
+            return -1;
+
+        return this.totalTimeSpent - e.totalTimeSpent;
     }
 }
