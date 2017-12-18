@@ -46,8 +46,6 @@ public class ApplicationManager extends Application<ServiceConfiguration> {
     @Override
     public void run(ServiceConfiguration serviceConfiguration, Environment environment) {
 
-        //String hostname = InetAddress.getLocalHost().getHostAddress();
-
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         environment.getObjectMapper().setSubtypeResolver(new StdSubtypeResolver());
     }
