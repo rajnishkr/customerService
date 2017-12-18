@@ -1,4 +1,4 @@
-package com.target.model;
+package com.target.exception;
 
 import lombok.NoArgsConstructor;
 
