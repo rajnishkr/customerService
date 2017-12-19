@@ -26,7 +26,7 @@ public class ExecuteService {
 
         //init JE Durations
         for (int i = 1; i <= request.getJe().size(); i++) {
-            String calls[] = request.getJe().get(i).split(",");
+            String calls[] = request.getJe().get(i-1).split(",");
             int j = 1;
             for (String jE : calls) {
                 jEDurationMatrix[i][j] = Integer.parseInt(jE);
@@ -35,7 +35,7 @@ public class ExecuteService {
         }
 
         for (int i = 1; i <= request.getSe().size(); i++) {
-            String calls[] = request.getSe().get(i).split(",");
+            String calls[] = request.getSe().get(i-1).split(",");
             int j = 1;
             for (String sE : calls) {
                 sEDurationMatrix[i][j] = Integer.parseInt(sE);
@@ -50,7 +50,7 @@ public class ExecuteService {
             j++;
         }
 
-        CallHandler callHandler = CallHandler.getInstance(numberOfJE, numberOfSE, numberOfManager, request.getNumber_of_calls());
+        CallHandler callHandler = CallHandler.getInstance(jEsCalls.length, sEsCalls.length, 1, request.getNumber_of_calls());
         callHandler.setjEDurationMatrix(jEDurationMatrix);
         callHandler.setsEDurationMatrix(sEDurationMatrix);
         callHandler.setMgrDurationMatrix(mgrDurationMatrix);
