@@ -5,8 +5,8 @@ import com.target.model.entity.EmployeeRank;
 
 public class Manager extends Employee {
 
-    public Manager(CallHandler callHandler, int escalationThreshold) {
-        super(callHandler, escalationThreshold);
+    public Manager(CallHandler callHandler, int escalationThreshold,int id) {
+        super(callHandler, escalationThreshold, id);
         rank = EmployeeRank.MANAGER;
     }
 

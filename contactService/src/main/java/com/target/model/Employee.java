@@ -28,13 +28,12 @@ public class Employee implements Comparable<Employee> {
     private int totalTimeSpent;
     private int callEscalated;
 
-    public Employee(CallHandler handler, int escalationThreshold) {
+    public Employee(CallHandler handler, int escalationThreshold,int id) {
         this.numberOfCallReceived = 0;
         this.totalTimeSpent = 0;
         this.callEscalated = 0;
         this.escalationThreshold = escalationThreshold;
-        Random random = new Random();
-        id = random.nextInt(100);
+        this.id = id;
         callHandler = handler;
         this.currentCall = null;
         this.employeeStatus = EmployeeStatus.Available;
@@ -42,14 +41,27 @@ public class Employee implements Comparable<Employee> {
 
     public void receiveCall(Call call) {
         this.employeeStatus = EmployeeStatus.OnCall;
+
         currentCall = call;
         call.setHandler(this);
+        int duration= getDuration(this.id,this.numberOfCallReceived);
+        call.setCallDuration(duration);
         currentCall.startCall();
         this.numberOfCallReceived++;
-        this.totalTimeSpent += call.getCallDuration();
-        if (call.getCallDuration() >= this.escalationThreshold) {
+        this.totalTimeSpent += duration;
+        if (duration >= this.escalationThreshold) {
             this.callEscalated++;
             escalateAndReassign();
+        }
+    }
+
+    private int getDuration(int id, int numberOfCallReceived) {
+        if(this.getRank().equals(EmployeeRank.JE)){
+            return callHandler.getjEDurationMatrix()[numberOfCallReceived+1][id];
+        }else if(this.getRank().equals(EmployeeRank.SE)){
+            return callHandler.getsEDurationMatrix()[numberOfCallReceived+1][id];
+        }else{
+            return callHandler.getMgrDurationMatrix()[1][numberOfCallReceived+1];
         }
     }
 

@@ -14,6 +14,9 @@ public class CallHandler {
     private int numberOfSE;
     private int numberOfManager;
     private int totalCalls;
+    Integer jEDurationMatrix [][];
+    Integer sEDurationMatrix [][] ;
+    Integer mgrDurationMatrix [][];
     private int MAX_CALL_PER_EMPLOYEE;
     private List<PriorityQueue<Employee>> employeeLevels;
     private List<List<Call>> callQueues;
@@ -35,18 +38,18 @@ public class CallHandler {
 
             PriorityQueue<Employee> jEs = new PriorityQueue<Employee>(numberOfJE);
             for (int k = 0; k < numberOfJE; k++) {
-                jEs.add(new JE(callHandler, Constants.JE_ESCALATION_TIME));
+                jEs.add(new JE(callHandler, Constants.JE_ESCALATION_TIME,k+1));
             }
             callHandler.employeeLevels.add(jEs);
 
             PriorityQueue<Employee> sEs = new PriorityQueue<Employee>(numberOfSE);
             for (int k = 0; k < numberOfSE; k++) {
-                sEs.add(new SE(callHandler, Constants.SE_ESCALATION_TIME));
+                sEs.add(new SE(callHandler, Constants.SE_ESCALATION_TIME,k+1));
             }
             callHandler.employeeLevels.add(sEs);
 
             PriorityQueue<Employee> managers = new PriorityQueue<Employee>(2);
-            managers.add(new Manager(callHandler, Constants.MGR_ESCALATION_TIME));
+            managers.add(new Manager(callHandler, Constants.MGR_ESCALATION_TIME,1));
             callHandler.employeeLevels.add(managers);
 
         }
@@ -65,8 +68,8 @@ public class CallHandler {
         return null;
     }
 
-    public void dispatchCall(Customer caller, int callDuration) {
-        Call call = new Call(caller, callDuration);
+    public void dispatchCall(Customer caller) {
+        Call call = new Call(caller);
         dispatchCall(call);
     }
 
@@ -91,4 +94,30 @@ public class CallHandler {
     public List<PriorityQueue<Employee>> getEmployeeLevels() {
         return employeeLevels;
     }
+
+    public void setjEDurationMatrix(Integer[][] jEDurationMatrix) {
+        this.jEDurationMatrix = jEDurationMatrix;
+    }
+
+    public void setsEDurationMatrix(Integer[][] sEDurationMatrix) {
+        this.sEDurationMatrix = sEDurationMatrix;
+    }
+
+    public void setMgrDurationMatrix(Integer[][] mgrDurationMatrix) {
+        this.mgrDurationMatrix = mgrDurationMatrix;
+    }
+
+
+    public Integer[][] getjEDurationMatrix() {
+        return jEDurationMatrix;
+    }
+
+    public Integer[][] getsEDurationMatrix() {
+        return sEDurationMatrix;
+    }
+
+    public Integer[][] getMgrDurationMatrix() {
+        return mgrDurationMatrix;
+    }
+
 }

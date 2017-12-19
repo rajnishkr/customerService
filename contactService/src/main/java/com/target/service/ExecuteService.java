@@ -20,15 +20,45 @@ public class ExecuteService {
         Request request = getDummyRequestObject();
         String jEsCalls[] = request.getJe().get(0).split(",");
         String sEsCalls[] = request.getSe().get(0).split(",");
-        int numberOfJE = jEsCalls.length;
-        int numberOfSE = sEsCalls.length;
-        int numberOfManager = 0;
-        CallHandler callHandler = CallHandler.getInstance(numberOfJE, numberOfSE, numberOfManager, request.getNumber_of_calls());
-        for (int i = 0; i < request.getJe().size(); i++) {
+        Integer jEDurationMatrix [][] = new Integer [request.getJe().size()+1][jEsCalls.length+1];
+        Integer sEDurationMatrix [][] = new Integer [request.getSe().size()+1][sEsCalls.length+1];
+        Integer mgrDurationMatrix [][] = new Integer[2][request.getMgr().split(",").length+1];
+
+        //init JE Durations
+        for (int i = 1; i <= request.getJe().size(); i++) {
             String calls[] = request.getJe().get(i).split(",");
+            int j = 1;
             for (String jE : calls) {
-                callHandler.dispatchCall(getDummyCustomer(), Integer.parseInt(jE));
+                jEDurationMatrix[i][j] = Integer.parseInt(jE);
+                j++;
             }
+        }
+
+        for (int i = 1; i <= request.getSe().size(); i++) {
+            String calls[] = request.getSe().get(i).split(",");
+            int j = 1;
+            for (String sE : calls) {
+                sEDurationMatrix[i][j] = Integer.parseInt(sE);
+                j++;
+            }
+        }
+
+        String calls[] = request.getMgr().split(",");
+        int j = 1;
+        for (String mgr : calls) {
+            mgrDurationMatrix[1][j] = Integer.parseInt(mgr);
+            j++;
+        }
+
+        CallHandler callHandler = CallHandler.getInstance(numberOfJE, numberOfSE, numberOfManager, request.getNumber_of_calls());
+        callHandler.setjEDurationMatrix(jEDurationMatrix);
+        callHandler.setsEDurationMatrix(sEDurationMatrix);
+        callHandler.setMgrDurationMatrix(mgrDurationMatrix);
+
+
+        for (int i = 0; i < request.getNumber_of_calls(); i++) {
+                callHandler.dispatchCall(getDummyCustomer());
+
         }
         displayResponse(callHandler.getEmployeeLevels());
 

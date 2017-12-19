@@ -12,9 +12,8 @@ public class Call {
     private EmployeeRank rank;
     private Employee handler;
 
-    public Call(Customer c, int callDuration) {
+    public Call(Customer c) {
         rank = EmployeeRank.JE;
-        this.callDuration = callDuration;
         caller = c;
     }
 
