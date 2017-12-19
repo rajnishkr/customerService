@@ -57,9 +57,9 @@ public class Employee implements Comparable<Employee> {
 
     private int getDuration(int id, int numberOfCallReceived) {
         if(this.getRank().equals(EmployeeRank.JE)){
-            return callHandler.getjEDurationMatrix()[numberOfCallReceived+1][id];
+            return callHandler.getjEDurationMatrix()[id][numberOfCallReceived+1];
         }else if(this.getRank().equals(EmployeeRank.SE)){
-            return callHandler.getsEDurationMatrix()[numberOfCallReceived+1][id];
+            return callHandler.getsEDurationMatrix()[id][numberOfCallReceived+1];
         }else{
             return callHandler.getMgrDurationMatrix()[1][numberOfCallReceived+1];
         }
@@ -119,6 +119,6 @@ public class Employee implements Comparable<Employee> {
         if (this.employeeStatus != EmployeeStatus.Available)
             return -1;
 
-        return this.totalTimeSpent - e.totalTimeSpent;
+        return this.numberOfCallReceived - e.numberOfCallReceived;
     }
 }

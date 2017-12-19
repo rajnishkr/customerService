@@ -50,7 +50,7 @@ public class ExecuteService {
             j++;
         }
 
-        CallHandler callHandler = CallHandler.getInstance(jEsCalls.length, sEsCalls.length, 1, request.getNumber_of_calls());
+        CallHandler callHandler = CallHandler.getInstance(request.getJe().size(),request.getSe().size(), 1, request.getNumber_of_calls());
         callHandler.setjEDurationMatrix(jEDurationMatrix);
         callHandler.setsEDurationMatrix(sEDurationMatrix);
         callHandler.setMgrDurationMatrix(mgrDurationMatrix);
